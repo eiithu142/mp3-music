@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MP3 Music Player</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  #audio-controls {
+    width: 20px;
+    margin: 20px;
+  }
+  #search-container {
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    margin: 20px auto;
+    width: 30%;
+    grid:30px;
+    margin-left: 30px;
+  }
+  #search-bar {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+ 
+  .search-result {
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    margin-bottom: 5px;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+  }
+  .search-container{
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    background-color: aqua;
+  }
+</style> 
+<h1>Mp3 Music</h1>
+
+</div>
+<div id="search-container">
+    
+    <input type="text" id="search-bar" placeholder="Search...">
+    
+  
+    <div id="search-results"></div>
+
+<div id="audio-controls">
+    <audio id="audio" controls>
+        <source src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+
+  <audio id="audio" controls style="display: none;"></audio>
+</div>
+</div><hr>
+</head>
+<body>
+    <div class="mp1">
+        <h2>Bring me back</h2>
+<audio id="audio" controls>
+  <source src="Bring me back.mp4" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<div id="audio-controls">
+  
+</div>
+</div>
+<div class="mp3">
+    <h2>8letter</h2>
+    <audio id="audio" controls>
+        <source src="8letter.mp4" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <div id="audio-controls">
+        
+      </div>
+</div>
+<script>
+    var searchInput = document.getElementById("search-bar");
+  var searchResults = document.getElementById("search-results");
+  var audio = document.getElementById("audio");
+
+  // Sample data representing search results with corresponding audio URLs
+  var searchData = [
+    { name: "bring  me back", audioUrl: "Bring me back.mp4" },
+    { name: "8letter", audioUrl: "8letter.mp4" },
+    { name: "", audioUrl: "" },
+    { name: "", audioUrl: "" },
+    
+  ];
+
+  searchInput.addEventListener("input", function() {
+    var searchText = this.value.toLowerCase();
+    searchResults.innerHTML = ""; // Clear previous search results
+
+    // Filter search results based on input text
+    var filteredResults = searchData.filter(function(item) {
+      return item.name.toLowerCase().includes(searchText);
+    });
+
+    // Display filtered search results
+    filteredResults.forEach(function(result) {
+      var resultElement = document.createElement("div");
+      resultElement.textContent = result.name;
+      resultElement.classList.add("search-result");
+
+      // Add click event listener to play corresponding audio
+      resultElement.addEventListener("click", function() {
+        playAudio(result.audioUrl);
+      });
+ // Add click event listener to remove search result
+ resultElement.addEventListener("click", function(event) {
+        event.stopPropagation();
+        this.remove();
+      });
+
+      searchResults.appendChild(resultElement);
+    
+      searchResults.appendChild(resultElement);
+    });
+  });
+
+  // Function to play audio
+  function playAudio(audioUrl) {
+    audio.src = audioUrl;
+    audio.play();
+  }
+  var audio = document.getElementById("audio");
+  var playPauseButton = document.getElementById("play-pause-button");
+
+  function togglePlayPause() {
+    if (audio.paused) {
+      audio.play();
+      playPauseButton.textContent = "Pause";
+    } else {
+      audio.pause();
+      playPauseButton.textContent = "Play";
+    }
+  }
+
+  playPauseButton.addEventListener("click", togglePlayPause);
+</script>
+</body>
+</html>

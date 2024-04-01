@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Bar with Playable Results</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  #search-container {
+    margin: 20px auto;
+    width: 50%;
+  }
+  #search-bar {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  #search-results {
+    margin-top: 20px;
+    text-align: left;
+  }
+  .search-result {
+    margin-bottom: 5px;
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+    <h2>Bring me back</h2>
+<audio id="audio" controls>
+  <source src="Bring me back.mp4" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<div id="audio-controls">
+  <button id="play-pause-button">Play</button>
+</div>
+</div>
+<div id="search-container">
+  <input type="text" id="search-bar" placeholder="Search...">
+  <div id="search-results"></div>
+</div>
+<audio id="audio" controls style="display: none;"></audio>
+<script>
+  var searchInput = document.getElementById("search-bar");
+  var searchResults = document.getElementById("search-results");
+  var audio = document.getElementById("audio");
+
+  // Sample data representing search results with corresponding audio URLs
+  var searchData = [
+    { name: "Song 1", audioUrl: "Bring me back.mp4" },
+    { name: "Song 2", audioUrl: "audio/song2.mp3" },
+    { name: "Song 3", audioUrl: "audio/song3.mp3" }
+  ];
+
+  searchInput.addEventListener("input", function() {
+    var searchText = this.value.toLowerCase();
+    searchResults.innerHTML = ""; // Clear previous search results
+
+    // Filter search results based on input text
+    var filteredResults = searchData.filter(function(item) {
+      return item.name.toLowerCase().includes(searchText);
+    });
+
+    // Display filtered search results
+    filteredResults.forEach(function(result) {
+      var resultElement = document.createElement("div");
+      resultElement.textContent = result.name;
+      resultElement.classList.add("search-result");
+
+      // Add click event listener to play corresponding audio
+      resultElement.addEventListener("click", function() {
+        playAudio(result.audioUrl);
+      });
+      
+ // Add click event listener to remove search result
+ resultElement.addEventListener("click", function(event) {
+        event.stopPropagation();
+        this.remove();
+      });
+
+      searchResults.appendChild(resultElement);
+    
+      searchResults.appendChild(resultElement);
+    });
+  });
+
+  // Add click event listener to remove search result
+  resultLabel.addEventListener("click", function() {
+        this.remove();
+      });
+
+      searchResults.appendChild(resultLabel);
+    
+  // Function to play audio
+  function playAudio(audioUrl) {
+    audio.src = audioUrl;
+    audio.play();
+  }
+</script>
+</body>
+</html>
